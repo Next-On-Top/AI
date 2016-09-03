@@ -1,0 +1,8 @@
+main: eminem.main
+name: Ai-EMbot
+version: 1.0
+description: Words
+
+commands:
+  chatm:
+    description: debug command
