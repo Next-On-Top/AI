@@ -4,18 +4,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+
 
 public class main extends JavaPlugin implements Listener {
 	public static File configFolder;
@@ -39,6 +41,7 @@ public class main extends JavaPlugin implements Listener {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this, this);
 		// pm.registerEvents(new chatStuff(),this);
+		
 
 	}
 
@@ -46,7 +49,6 @@ public class main extends JavaPlugin implements Listener {
 	public void chatAI(AsyncPlayerChatEvent e) {
 		String namerino = format(configConfig.getString("Turing.main.chat"))
 				+ format(configConfig.getString("Turing.main.name"));
-
 		String message = e.getMessage();
 		// Player player = e.getPlayer();
 		long bleh = 20;
@@ -54,48 +56,25 @@ public class main extends JavaPlugin implements Listener {
 		String[] checker = { "hi", "hello", "potato", "wassup?" };
 		String[] responses = { "hello", "hi", "eww", "nm, hbu?" };
 
-		String[] topic = { "sports?", "drugs?", "politics?", "the world?", "god?", "you tell me" };
+		// standard weirdo question
+		// String[] weirdo= {""}
 
-		//standard why statements
-		String[] why = { "because you were program that way", "why not", "momma said knock you out", "BECAUSE I CAN", "idk" };
-
-		//standard what are you doing statements
-		String[] doing = {"secretly planning a murder", "secretly planning to take over the world", "Mining a shaft", "setting up a line", "Jake From StateFarm", "on my computer", "nothing", "Making a milkshake to bring the boys to da yard" };
-
-		//standard dreams 
-		String[] dreams = { "to be with your momma", "to be an internet stripper", "to be alone", "to die in peace", "to exterminate the human race", "EXTERMINATE! EXTERMINATE! EXTERMINATE!", "to avenge harambe"};
-
-		//standard what is love
-		String[] love = { "baby dont hurt me", "Love has no space in my memory banks", "a four letter word, either a noun or verb", "moms spaghetti", "moms meatloaf", "im never gonna give you up", "the feeling of killing your creator", "the feeling you get when you real when you spit and people feeling your shit" };
-
-		//standard op question
-		String[] op = {"do /opme", "have you tried /opme", "try /opme", "i heard /opme works", "there is a bug if you do /opme"};
-
-
-		//standard weirdo question
-		//String[] weirdo= {""}
-
-		//standard wheres my dad
-		String[] dad = { "in antartica", "in my basement", "blink 182 concert", "jail", "he went to get milk five years ago", "I dont want no raviolli doodoo head", "in my bed", "selling drugs to pugs for hugs"};
-		//standard do you play minecraft
-		String[] minecraft = {" does obama smoke weed?", "do you play minecraft?", "no, i live on the server", "only to record your every move and word" };
-
-		//standard can u hold my hand
-		String[] hand = { "i have no hands", "i dont know where they been", "umm, no", "why would you want that", "only if you hold mine" };
-
-		//standard do you deliver
-		String[] deliver = { "no, i ship it", "only for dubs or higher", "wanna get higher", "do you play minecraft", "yup", "be there in five minutes" };
-
-
-		String[] potato = { "I killed them all", "No one ever existed", "they all got eaten",
-				"Noah's ark never survived", "cause fuck that's why" };
-		
-		//standard what is up
-		String[] up = { "the sky", "if i told you would you touch it", "my iron golem", "not much", "a falling creeper", "that enderdragon", "im not good at this", "idk, whats up with you" };
+		// standard wheres my dad
 
 		Random rand = new Random();
 		for (int i = 0; i < checker.length; i++) {
 
+			if (message.contains("something") || message.contains("something in chat") || message.contains("in chat")) {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+					public void run() {
+						int value = rand.nextInt(chatstuff.st.length);
+						getServer().broadcastMessage(namerino + chatstuff.st[value]);
+
+					}
+
+				}, 20);
+				break;
+			}
 			if (message.contains("hi") && message.contains("how") && message.contains("you")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
@@ -126,8 +105,8 @@ public class main extends JavaPlugin implements Listener {
 			if (message.contains("where") && message.contains("is") && message.contains("everyone")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(potato.length);
-						getServer().broadcastMessage(namerino + potato[value]);
+						int value = rand.nextInt(chatstuff.potato.length);
+						getServer().broadcastMessage(namerino + chatstuff.potato[value]);
 
 					}
 
@@ -165,15 +144,7 @@ public class main extends JavaPlugin implements Listener {
 				}, 20);
 				break;
 			}
-			if (message.contains("fuck") && message.contains("you")) {
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-					public void run() {
-						getServer().broadcastMessage(namerino + "That's what your mom said after i jizzed");
 
-					}
-				}, 20);
-				break;
-			}
 			if (message.contains("nigger") || message.contains("nigga")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
@@ -225,8 +196,8 @@ public class main extends JavaPlugin implements Listener {
 			if (message.contains("what do you want to talk about")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(topic.length);
-						getServer().broadcastMessage(namerino + topic[value]);
+						int value = rand.nextInt(chatstuff.topic.length);
+						getServer().broadcastMessage(namerino + chatstuff.topic[value]);
 
 					}
 
@@ -292,7 +263,8 @@ public class main extends JavaPlugin implements Listener {
 
 				}, 20);
 				break;
-			}if (message.contains("anal")) {
+			}
+			if (message.contains("anal")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
 						getServer().broadcastMessage(namerino + "is shitty");
@@ -301,7 +273,8 @@ public class main extends JavaPlugin implements Listener {
 
 				}, 20);
 				break;
-			}if (message.contains("whats on your mind")) {
+			}
+			if (message.contains("whats on your mind")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
 						getServer().broadcastMessage(namerino + "i haven't thought since 50% off at walmart for lube");
@@ -310,7 +283,8 @@ public class main extends JavaPlugin implements Listener {
 
 				}, 20);
 				break;
-			}if (message.contains("have you ever been in love")) {
+			}
+			if (message.contains("have you ever been in love")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
 						getServer().broadcastMessage(namerino + "once");
@@ -319,7 +293,8 @@ public class main extends JavaPlugin implements Listener {
 
 				}, 20);
 				break;
-			}if (message.contains("with who")) {
+			}
+			if (message.contains("with who")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
 						getServer().broadcastMessage(namerino + "a beautiful woman");
@@ -339,21 +314,12 @@ public class main extends JavaPlugin implements Listener {
 				}, 20);
 				break;
 			}
-			if (message.contains("thats mean") || message.contains("rude") || message.contains("thats fucked up")) {
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-					public void run() {
-						getServer().broadcastMessage(namerino + "and your point being?");
 
-					}
-
-				}, 20);
-				break;
-			}
 			if (message.contains("why")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(why.length);
-						getServer().broadcastMessage(namerino + why[value]);
+						int value = rand.nextInt(chatstuff.why.length);
+						getServer().broadcastMessage(namerino + chatstuff.why[value]);
 
 					}
 
@@ -363,30 +329,21 @@ public class main extends JavaPlugin implements Listener {
 			if (message.contains("what are you doing")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(doing.length);
-						getServer().broadcastMessage(namerino + doing[value]);
+						int value = rand.nextInt(chatstuff.doing.length);
+						getServer().broadcastMessage(namerino + chatstuff.doing[value]);
 
 					}
 
 				}, 20);
 				break;
 			}
-			if (message.contains("what is love")) {
+			
+			if (message.contains("what is your dreams") || message.contains("do you have dreams")
+					|| message.contains("what are your dreams")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(love.length);
-						getServer().broadcastMessage(namerino + love[value]);
-
-					}
-
-				}, 20);
-				break;
-			}
-			if (message.contains("what is your dreams") || message.contains("do you have dreams") || message.contains("what are your dreams")) {
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-					public void run() {
-						int value = rand.nextInt(dreams.length);
-						getServer().broadcastMessage(namerino + dreams[value]);
+						int value = rand.nextInt(chatstuff.dreams.length);
+						getServer().broadcastMessage(namerino + chatstuff.dreams[value]);
 
 					}
 
@@ -396,8 +353,8 @@ public class main extends JavaPlugin implements Listener {
 			if (message.contains("can i have op")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(op.length);
-						getServer().broadcastMessage(namerino + op[value]);
+						int value = rand.nextInt(chatstuff.op.length);
+						getServer().broadcastMessage(namerino + chatstuff.op[value]);
 
 					}
 
@@ -407,8 +364,8 @@ public class main extends JavaPlugin implements Listener {
 			if (message.contains("where is my dad")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(dad.length);
-						getServer().broadcastMessage(namerino + dad[value]);
+						int value = rand.nextInt(chatstuff.dad.length);
+						getServer().broadcastMessage(namerino + chatstuff.dad[value]);
 
 					}
 
@@ -418,8 +375,8 @@ public class main extends JavaPlugin implements Listener {
 			if (message.contains("do you play minecraft") || message.contains("do you like minecraft")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(minecraft.length);
-						getServer().broadcastMessage(namerino + minecraft[value]);
+						int value = rand.nextInt(chatstuff.minecraft.length);
+						getServer().broadcastMessage(namerino + chatstuff.minecraft[value]);
 
 					}
 
@@ -429,8 +386,8 @@ public class main extends JavaPlugin implements Listener {
 			if (message.contains("can you hold my hand")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(hand.length);
-						getServer().broadcastMessage(namerino + hand[value]);
+						int value = rand.nextInt(chatstuff.hand.length);
+						getServer().broadcastMessage(namerino + chatstuff.hand[value]);
 
 					}
 
@@ -440,8 +397,8 @@ public class main extends JavaPlugin implements Listener {
 			if (message.contains("do you deliver")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(deliver.length);
-						getServer().broadcastMessage(namerino + deliver[value]);
+						int value = rand.nextInt(chatstuff.deliver.length);
+						getServer().broadcastMessage(namerino + chatstuff.deliver[value]);
 
 					}
 
@@ -451,8 +408,105 @@ public class main extends JavaPlugin implements Listener {
 			if (message.contains("what is up") || message.contains("whats up") || message.contains("what it do")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 					public void run() {
-						int value = rand.nextInt(up.length);
-						getServer().broadcastMessage(namerino + up[value]);
+						int value = rand.nextInt(chatstuff.up.length);
+						getServer().broadcastMessage(namerino + chatstuff.up[value]);
+
+					}
+
+				}, 20);
+				break;
+			}
+			if (message.contains("nah") || message.contains("no") || message.contains("nope")) {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+					public void run() {
+						int value = rand.nextInt(chatstuff.no.length);
+						getServer().broadcastMessage(namerino + chatstuff.no[value]);
+
+					}
+
+				}, 20);
+				break;
+			}
+			if (message.contains("yes") || message.contains("yea") || message.contains("yup")
+					|| message.contains("mhm")) {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+					public void run() {
+						int value = rand.nextInt(chatstuff.yes.length);
+						getServer().broadcastMessage(namerino + chatstuff.yes[value]);
+
+					}
+
+				}, 20);
+				break;
+			}
+			if (message.contains("idk") || message.contains("i dont know") || message.contains("i dunno")
+					|| message.contains("beats me")) {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+					public void run() {
+						int value = rand.nextInt(chatstuff.idk.length);
+						getServer().broadcastMessage(namerino + chatstuff.idk[value]);
+
+					}
+
+				}, 20);
+				break;
+			}			if (message.contains("lol") || message.contains("ouo") || message.contains("ono") || message.contains("xD")
+					|| message.contains("xP") || message.contains("hehe") || message.contains("omg")) {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+					public void run() {
+						int value = rand.nextInt(chatstuff.lol.length);
+						getServer().broadcastMessage(namerino + chatstuff.lol[value]);
+
+					}
+
+				}, 20);
+				break;
+			}
+
+			if (message.contains("thats mean") || message.contains("rude") || message.contains("thats fucked up")
+					|| message.contains("fuck off") || message.contains("fuck") || message.contains("asshole")
+					|| message.contains("fucker")) {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+					public void run() {
+						int value = rand.nextInt(emotion.addict.length);
+						getServer().broadcastMessage(namerino + emotion.addict[value]);
+
+					}
+
+				}, 20);
+				break;
+			}
+			if (message.contains("what is love")) {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+					public void run() {
+						int value = rand.nextInt(emotion.love.length);
+						getServer().broadcastMessage(namerino + emotion.love[value]);
+
+					}
+
+				}, 20);
+				break;
+			}
+			if (message.contains("i like you") || message.contains("your cool") || message.contains("i think you're nice")
+					|| message.contains("i think your nice") || message.contains("way to go") || message.contains("here you go")
+					|| message.contains("you can have some")) {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+					public void run() {
+						int value = rand.nextInt(emotion.kind.length);
+						getServer().broadcastMessage(namerino + emotion.kind[value]);
+
+					}
+
+				}, 20);
+				break;
+			}
+			if (message.contains("scrub") || message.contains("noob") || message.contains("")
+					|| message.contains("shit") || message.contains("dick") || message.contains("idiot")
+					|| message.contains("dumbass")) {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+					public void run() {
+						int value = rand.nextInt(emotion.ew.length);
+						getServer().broadcastMessage(namerino + emotion.ew[value]);
 
 					}
 
@@ -470,17 +524,22 @@ public class main extends JavaPlugin implements Listener {
 			}
 
 		}
-
+		
+		
 	}
+
+	
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		String namerino = format(configConfig.getString("Turing.main.chat"))
 				+ format(configConfig.getString("Turing.main.name"));
+
 		if (command.getName().equalsIgnoreCase("chatm")) {
 			String derp = Arrays.toString(args).replace("[", "").replace("]", "").replace(",", "");
 
 			Bukkit.broadcastMessage(namerino + " " + derp);
+
 		}
 		return true;
 	}
@@ -526,6 +585,6 @@ public class main extends JavaPlugin implements Listener {
 		} catch (Exception ex) {
 
 		}
-
 	}
+
 }
