@@ -500,7 +500,7 @@ public class main extends JavaPlugin implements Listener {
 				}, 20);
 				break;
 			}
-			if (message.contains("scrub") || message.contains("noob") || message.contains("")
+			if (message.contains("scrub") || message.contains("noob") 
 					|| message.contains("shit") || message.contains("dick") || message.contains("idiot")
 					|| message.contains("dumbass")) {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
