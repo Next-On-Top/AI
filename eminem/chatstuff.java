@@ -50,7 +50,7 @@ public class chatstuff {
 	
 
 	//standard emotional luagh response
-	static String[] lol = { "lol", "ouo", "ono", "omg", "ctfu", "im dying", "aye fam", "I got teh spaghetti in 4 weeks ayy lmao"};
+	static String[] lol = { "lol", "ouo", "ono", "omg", "ctfu", "im dying", "aye fam"};
 
 
 	//standard something
