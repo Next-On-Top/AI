@@ -5,6 +5,8 @@ package eminem;
 
 
 public class chatstuff {
+	//static String[] slurs = { "nigga", "nigger", "spic", "chink", "hitler", "jewbag", "beaner", "wetback", "blaxican", "blockhopper", "bloke", "bludger", "blue-eyed devil", "blue eyed devil", "suicide bomber", "ahmed", "terrorist", "boreder bandit", "border hopper", "border hoper", "boxcutter", "budddhahead", "bugeater", "bug-eater", "bug eater", "bushnigger", "sandnigger", "coon", "coconut nigger" };
+	
     static String[] topic = { "sports?", "drugs?", "politics?", "the world?", "god?", "you tell me" };
 
     //standard why statements
